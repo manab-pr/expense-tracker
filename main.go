@@ -12,7 +12,6 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -21,7 +20,7 @@ var userCollection *mongo.Collection = db.OpenCollection(db.Client, "user")
 func InitRedis() *redis.Client {
 	rdb := redis.NewClient(
 		&redis.Options{
-			Addr:     "localhost:6379",
+			Addr:     os.Getenv("REDIS_URL"),
 			Password: "",
 			DB:       0,
 		})
@@ -35,10 +34,12 @@ func InitRedis() *redis.Client {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// if _, err := os.Stat(".env"); err == nil {
+    //     // Load the .env file
+    //     if err := godotenv.Load(); err != nil {
+    //         log.Fatalf("Error loading .env file: %v", err)
+    //     }
+    // }
 
 	//initiate redis client
 	config.Rdb = InitRedis()
@@ -48,9 +49,9 @@ func main() {
 	if port == "" {
 		port = "8000"
 	}
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
