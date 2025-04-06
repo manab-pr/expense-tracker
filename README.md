@@ -190,7 +190,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any questions or feedback, feel free to reach out:
 
 - **Email**: expensetracker@orion.com
-- **GitHub**: https://github.com/manab-pr/expanse_tracker/tree/main
+- **GitHub**: https://github.com/manab-pr/expanse-tracker/tree/main
 
 ---
 
